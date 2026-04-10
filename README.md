@@ -16,3 +16,24 @@ Objectives:
 ~ Ensure results align with the underlying dataset
 
 
+Dataset:
+Source: CDC COVID-19 Case Surveillance Public Use Data
+Link to Download:
+Original dataset size: ~14GB
+Workflow Adaptation
+
+The original plan was to perform analysis on the full dataset. However, due to its size, direct processing and modeling were not computationally feasible.
+
+To address this, the workflow was adapted to use a representative sampled dataset:
+
+A 0.5% sample was generated using chunk-based processing
+The sample was validated to preserve:
+demographic distributions
+outcome variables
+temporal trends
+
+All analysis, modeling, and validation were conducted using this sampled dataset to ensure:
+
+efficiency
+reproducibility
+consistency
