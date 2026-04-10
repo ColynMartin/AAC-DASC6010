@@ -37,3 +37,55 @@ All analysis, modeling, and validation were conducted using this sampled dataset
 efficiency
 reproducibility
 consistency
+
+#WEEKLY WORKUP BREAKDOWN: (MAYBE OR WILL BE INCLUDED AS PLAN)
+
+Week 1 – Data Acquisition & Preparation
+
+~ Generated representative sample dataset
+~ Cleaned missing and inconsistent values
+~ Standardized formats and variables
+
+Week 2 – Feature Engineering & EDA
+
+~ Created derived features:
+daily case counts
+
+rolling averages
+
+normalized case rates
+
+~ Conducted exploratory data analysis
+
+Week 3 – Anomaly Detection Modeling
+
+~ Implemented:
+Isolation Forest
+
+Local Outlier Factor (LOF)
+
+One-Class SVM
+
+Detected and compared anomalies across models
+
+Week 4 – Validation & Interpretation
+
+Verified anomalies correspond to actual data points
+
+Ensured consistency with the dataset
+
+Interpreted anomalies using real-world context:
+
+reporting delays
+
+backlog updates
+
+outbreak spikes
+
+Week 5 – Synthesis & Presentation
+
+Summarized findings
+
+Evaluated hypotheses
+
+Prepared final presentation
