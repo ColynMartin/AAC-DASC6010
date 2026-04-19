@@ -60,7 +60,7 @@ This dataset is no longer actively updated and represents a fixed snapshot of re
 2. Click **“Export”**  
 3. Select **“Download file” → CSV format**  
 
---- OR
+--- OR ---
 
 ### Access to Our Exported Dataset
 
