@@ -173,23 +173,191 @@ Each model detected ~78 anomalies.
 
 ---
 
-## Repository Structure
-
-📌 Workflow:
+## Core Workflow Structure:
 Sampling → Cleaning → EDA → Feature Engineering → Modeling → Validation → Interpretation
 
 ---
 
-## ▶️ How to Reproduce This Project
+##  Step-by-Step Reproduction Guide
 
-1. Generate sample dataset  
-2. Clean dataset  
-3. Create features  
-4. Run models  
-5. Validate results  
-6. Review interpretation  
+This project can be recreated from the provided files by following the workflow below.
 
-All required files are included.
+### 1. Obtain the full CDC dataset or use the provided sample
+You have two options:
+
+**Option A: Download from CDC**
+1. Go to the CDC COVID-19 Case Surveillance Public Use Dataset page:  
+   `https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf/about_data`
+2. Click **Export**
+3. Select **Download file → CSV**
+
+**Option B: Request our exported full CSV**
+- Our exported CSV is stored in a university OneDrive environment and may require permission.
+- Contact:
+  - `martincol25@students.ecu.edu`
+  - `vakdea24@students.ecu.edu`
+  - `bohraa25@students.ecu.edu`
+
+**Option C: Use the provided 0.5% sample**
+- For full reproducibility of this repo, you can use:
+  - `Dataset & Sampling/0.5_cdc_case_surveillance_sample.xls`
+
+---
+
+### 2. Generate or review the 0.5% sampled dataset
+Run or review:
+
+- `Dataset & Sampling/Generation_of_0.5%_Sample.ipynb`
+
+This notebook:
+- reads the full CDC dataset in chunks
+- applies chunk-based random sampling
+- uses a fixed random seed for reproducibility
+- produces the sampled dataset
+
+Output:
+- `Dataset & Sampling/0.5_cdc_case_surveillance_sample.xls`
+
+Supporting documentation:
+- `Dataset & Sampling/Generation_of_0.5%_Sample.html`
+- `Dataset & Sampling/Justification_For_The_0.5_Percent_Sampled_Dataset.zip`
+
+---
+
+### 3. Clean and prepare the sampled dataset
+Run:
+
+- `Data Cleaning & Preparation/Cleaned_0.5_sample_dataset_workup.ipynb`
+
+This notebook:
+- standardizes variable names and formats
+- converts date fields for time-based analysis
+- handles missing categorical values using `"Unknown"`
+- recodes binary variables
+- removes high-missingness variables
+
+Output:
+- `Data Cleaning & Preparation/0.5_sample_cleaned_dataset.xls`
+
+Reference file:
+- `Data Cleaning & Preparation/Cleaned_0.5_sample_dataset_workup.html`
+
+---
+
+### 4. Perform exploratory data analysis
+Run:
+
+- `Exploratory Data Analysis/Exploratory Data Analysis.ipynb`
+
+This notebook is used to:
+- examine variable distributions
+- inspect temporal patterns
+- understand data quality and class imbalance
+- support the decision-making for feature engineering and anomaly analysis
+
+---
+
+### 5. Create derived features for modeling
+Run:
+
+- `Feature Engineering/Derived_Features_Workup_Notebook.ipynb`
+
+This notebook creates the main modeling features:
+- daily case counts
+- daily case change
+- 7-day rolling average
+
+Output:
+- `Feature Engineering/derived_features_sample.xls`
+
+Additional related files:
+- `Feature Engineering/Derived_Features_Workup_Notebook.html`
+- `Feature Engineering/Exploratory_Analysis_and_Feature_Preparation.ipynb`
+
+---
+
+### 6. Run anomaly detection models
+Run:
+
+- `Anomaly Detection Models/Anomaly_Detection_Modeling.ipynb`
+
+This notebook:
+- loads the engineered features
+- trains the three anomaly detection models:
+  - Isolation Forest
+  - Local Outlier Factor (LOF)
+  - One-Class SVM
+- generates anomaly predictions for each model
+- identifies overlapping anomalies across models
+
+Outputs:
+- `Anomaly Detection Models/isolation_forest_anomalies.xls`
+- `Anomaly Detection Models/lof_anomalies.xls`
+- `Anomaly Detection Models/svm_anomalies.xls`
+- `Anomaly Detection Models/common_anomalies.xls`
+
+---
+
+### 7. Validate detected anomalies
+Run:
+
+- `Anomaly Detection Models/Validation_of_Anomalies_Detected.ipynb`
+
+This notebook validates anomaly results by checking:
+- anomaly dates match the reconstructed dataset
+- derived features align correctly
+- anomaly days differ statistically from normal days
+- overlapping anomalies across all three models represent high-confidence results
+
+This step supports the project’s trustworthiness claim.
+
+---
+
+### 8. Compare and interpret model outputs
+Review:
+
+- `Model Comparison/Analysis_and_Interpretation_of_Anomaly_Detection_Models.ipynb`
+- `Model Comparison/Analysis_and_Interpretation_of_Anomaly_Detection_Models.html`
+
+These files help summarize:
+- model behavior
+- differences in anomaly capture
+- cross-model overlap
+
+---
+
+### 9. Review the real-world interpretation of anomalies
+Open:
+
+- `Data Interpretation/Analysis and Interpretation of Anomalies.docx`
+
+This document connects anomaly patterns to possible public health explanations, such as:
+- reporting delays
+- backlog releases
+- outbreak surges
+- data corrections
+
+---
+
+##  Recommended Execution Order
+
+For the cleanest recreation of the workflow, use this order:
+
+1. `Generation_of_0.5%_Sample.ipynb`
+2. `Cleaned_0.5_sample_dataset_workup.ipynb`
+3. `Exploratory Data Analysis.ipynb`
+4. `Derived_Features_Workup_Notebook.ipynb`
+5. `Anomaly_Detection_Modeling.ipynb`
+6. `Validation_of_Anomalies_Detected.ipynb`
+7. `Analysis_and_Interpretation_of_Anomaly_Detection_Models.ipynb`
+8. `Analysis and Interpretation of Anomalies.docx`
+
+---
+
+##  Reproducibility Notes
+
+- The full CDC dataset is very large, so this project uses a **0.5% sampled dataset** for practical reproducibility.
+- All major analysis, modeling, and validation results in this repository can be reproduced using the included sample files.
 
 ---
 
@@ -201,7 +369,7 @@ All required files are included.
 
 ---
 
-## 📌 Final Takeaway
+##  Final Takeaway
 
 Anomaly detection can identify irregular patterns in public health data — but **trustworthiness requires validation**.
 
