@@ -427,3 +427,9 @@ By combining:
 - real-world interpretation  
 
 we show anomaly detection can be both **effective and interpretable**.
+
+## Final Presentation
+
+To read through our final project PowerPoint, it is available here:
+
+→ `Final Presentation/Big Data Analytics – Final Project PPT.pptx`
