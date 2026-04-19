@@ -172,6 +172,51 @@ Each model detected ~78 anomalies.
 - Some anomalies need external validation  
 
 ---
+## 📂 Repository Structure
+
+```text
+.
+├── Anomaly Detection Models/
+│   ├── Anomaly_Detection_Modeling.ipynb
+│   ├── Validation_of_Anomalies_Detected.ipynb
+│   ├── common_anomalies.xls
+│   ├── isolation_forest_anomalies.xls
+│   ├── lof_anomalies.xls
+│   ├── svm_anomalies.xls
+│
+├── Data Cleaning & Preparation/
+│   ├── 0.5_sample_cleaned_dataset.xls
+│   ├── Cleaned_0.5_sample_dataset_workup.html
+│   ├── Cleaned_0.5_sample_dataset_workup.ipynb
+│
+├── Data Interpretation/
+│   ├── Analysis and Interpretation of Anomalies.docx
+│
+├── Dataset & Sampling/
+│   ├── 0.5_cdc_case_surveillance_sample.xls
+│   ├── Generation_of_0.5%_Sample.html
+│   ├── Generation_of_0.5%_Sample.ipynb
+│   ├── Justification_For_The_0.5_Percent_Sampled_Dataset.zip
+│
+├── Exploratory Data Analysis/
+│   ├── Exploratory Data Analysis.ipynb
+│
+├── Feature Engineering/
+│   ├── Derived_Features_Workup_Notebook.html
+│   ├── Derived_Features_Workup_Notebook.ipynb
+│   ├── Exploratory_Analysis_and_Feature_Preparation.ipynb
+│   ├── derived_features_sample.xls
+│
+├── Model Comparison/
+│   ├── Analysis_and_Interpretation_of_Anomaly_Detection_Models.html
+│   ├── Analysis_and_Interpretation_of_Anomaly_Detection_Models.ipynb
+│
+├── Project Workflow & Overview/
+│   ├── Project_Workflow_Timeline_and_Tasks.docx
+│
+└── README.md
+```
+---
 
 ## Core Workflow Structure:
 Sampling → Cleaning → EDA → Feature Engineering → Modeling → Validation → Interpretation
@@ -371,7 +416,7 @@ For the cleanest recreation of the workflow, use this order:
 
 ##  Final Takeaway
 
-Anomaly detection can identify irregular patterns in public health data — but **trustworthiness requires validation**.
+Anomaly detection can identify irregular patterns in public health data, but **trustworthiness requires validation**.
 
 By combining:
 - statistical evidence  
