@@ -144,7 +144,7 @@ Each model detected ~78 anomalies.
 - Mean cases: ~600–780 vs. ~80–100  
 - Variability: ~970 vs. ~70  
 
--> Indicates extreme, non-random behavior  
+→  Indicates extreme, non-random behavior  
 
 ### 3. Cross-Model Agreement
 - **32 shared anomalies across all models**  
