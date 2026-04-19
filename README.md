@@ -1,91 +1,213 @@
-# AAC-DASC6010 (title work in progress)
+# Evaluating Trustworthy Anomaly Detection in CDC COVID-19 Data
 
-Goal: This project evaluates how anomaly detection models can be applied to large-scale public health surveillance data. Using the CDC COVID-19 Case Surveillance Public Use Data, we analyze reporting patterns over time to identify unusual observations that deviate from expected trends.
+##  Project Overview
+This project investigates whether anomaly detection models can reliably identify meaningful irregularities in large-scale public health data.
 
-The primary goal is not just to detect anomalies, but to determine whether these anomalies are meaningful, interpretable, and trustworthy in real-world public health contexts.
+Using the CDC COVID-19 Case Surveillance dataset, we analyze reporting patterns over time to detect unusual observations and evaluate whether those anomalies are **statistically valid, consistent across models, and interpretable in real-world context**.
 
+---
 
-Objectives: 
+##  Objectives
+- Detect anomalies in COVID-19 reporting data  
+- Compare results across multiple anomaly detection models  
+- Evaluate whether anomalies are:
+  - Statistically significant  
+  - Consistent across models  
+  - Explainable using real-world public health events
+    
+---
 
-~ Apply anomaly detection models to COVID-19 surveillance data
+## 👥 Team Roles
 
-~ Compare outputs across multiple models
+- **Colyn Martin — Data Preparation & Quality Control**
+  - Data cleaning and preprocessing  
+  - Feature engineering  
+  - Verified data integrity and anomaly alignment  
 
-~ Evaluate whether detected anomalies are valid and explainable
+- **Ayushi Bohra — Anomaly Detection Modeling**
+  - Implemented models (Isolation Forest, LOF, One-Class SVM)  
+  - Generated anomaly outputs  
 
-~ Ensure results align with the underlying dataset
+- **Ananya Vakde — Analysis & Interpretation**
+  - Interpreted anomaly patterns  
+  - Connected results to real-world context  
 
+---
 
-Dataset:
-Source: CDC COVID-19 Case Surveillance Public Use Data
-Link to Download:
-Original dataset size: ~14GB
-Workflow Adaptation
+##  Dataset
 
-The original plan was to perform analysis on the full dataset. However, due to its size, direct processing and modeling were not computationally feasible.
+- **Source:** CDC COVID-19 Case Surveillance Public Use Dataset  
+- **Type:** Observational, case-level data  
+- **Time Range:** 2020–2024  
+- **Original Size:** ~13–14 GB (tens of millions of records)  
 
-To address this, the workflow was adapted to use a representative sampled dataset:
+The dataset used in this project was obtained from the official CDC public use surveillance dataset:
 
-A 0.5% sample was generated using chunk-based processing
-The sample was validated to preserve:
-demographic distributions
-outcome variables
-temporal trends
+🔗 https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf/about_data
 
-All analysis, modeling, and validation were conducted using this sampled dataset to ensure:
+---
 
-efficiency
-reproducibility
-consistency
+### ⚠️ Dataset Disclaimer
 
-#WEEKLY WORKUP BREAKDOWN: (MAYBE OR WILL BE INCLUDED AS PLAN)
+Reporting of new COVID-19 Case Surveillance data was discontinued on **July 1, 2024**.  
+This dataset is no longer actively updated and represents a fixed snapshot of reported cases.
 
-Week 1 – Data Acquisition & Preparation
+---
 
-~ Generated representative sample dataset
-~ Cleaned missing and inconsistent values
-~ Standardized formats and variables
+###  How to Obtain the Original Dataset (CDC)
 
-Week 2 – Feature Engineering & EDA
+1. Navigate to the dataset page (link above)  
+2. Click **“Export”**  
+3. Select **“Download file” → CSV format**  
 
-~ Created derived features:
-daily case counts
+--- OR
 
-rolling averages
+### Access to Our Exported Dataset
 
-normalized case rates
+We exported a full CSV version of the dataset (February 2026) and stored it in a university OneDrive environment due to its large file size.
 
-~ Conducted exploratory data analysis
+🔗 [Original Exported Dataset (University OneDrive)](https://studentsecuedu66932-my.sharepoint.com/:x:/r/personal/martincol25_students_ecu_edu/Documents/COVID-19_Case_Surveillance_Public_Use_Data_20260225.csv)
 
-Week 3 – Anomaly Detection Modeling
+ Note:
+- This file may require access approval due to university restrictions  
+- External users may not be able to download it directly  
 
-~ Implemented:
-Isolation Forest
+Please email us to request access:
+- martincol25@students.ecu.edu  
+- vakdea24@students.ecu.edu  
+- bohraa25@students.ecu.edu  
 
-Local Outlier Factor (LOF)
+---
 
-One-Class SVM
+###  Reproducibility Note
 
-Detected and compared anomalies across models
+- A **0.5% sampled dataset** is included:
+  → `0.5_cdc_case_surveillance_sample.xls`
 
-Week 4 – Validation & Interpretation
+- All analysis and results are based on this sample  
+- Sampling process:
+  → `Dataset & Sampling/Generation_of_0.5%_Sample.ipynb`
 
-Verified anomalies correspond to actual data points
+---
 
-Ensured consistency with the dataset
+###  Important
 
-Interpreted anomalies using real-world context:
+The sample dataset preserves the statistical structure of the full dataset, ensuring:
+- consistent distributions  
+- meaningful anomaly detection  
+- full reproducibility without needing the full dataset  
 
-reporting delays
+---
 
-backlog updates
+##  Methodology
 
-outbreak spikes
+###  Sampling Strategy
+- Chunk-based sampling (~100,000 rows per chunk)  
+- Randomly selected **0.5% per chunk**  
+- Fixed random seed  
 
-Week 5 – Synthesis & Presentation
+Final dataset: **191,662 observations**
 
-Summarized findings
+---
 
-Evaluated hypotheses
+###  Data Preparation
+- Cleaned and standardized dataset  
+- Handled missing values (categorical → "Unknown")  
+- Encoded binary variables  
+- Removed high-missingness features  
 
-Prepared final presentation
+---
+
+###  Feature Engineering
+- Daily case counts  
+- Daily case change  
+- 7-day rolling average  
+
+---
+
+### Anomaly Detection Models
+- Isolation Forest → global spikes  
+- LOF → local irregularities  
+- One-Class SVM → complex patterns  
+
+Each model detected ~78 anomalies.
+
+---
+
+##  Validation Approach
+
+### 1. Data & Feature Validation
+- 100% of anomaly dates matched dataset  
+- Features aligned correctly  
+
+### 2. Statistical Validation
+- Mean cases: ~600–780 vs. ~80–100  
+- Variability: ~970 vs. ~70  
+
+-> Indicates extreme, non-random behavior  
+
+### 3. Cross-Model Agreement
+- **32 shared anomalies across all models**  
+
+### 4. Pattern Validation
+- Top percentile values  
+- Align with visible spikes  
+
+---
+
+##  Key Findings
+- Anomalies cluster in time (not random)  
+- Align with COVID surges  
+- Also reflect:
+  - reporting delays  
+  - backlog releases  
+  - data corrections  
+
+---
+
+##  Limitations
+- Based on 0.5% sample  
+- Reporting inconsistencies  
+- No regional breakdown  
+- Some anomalies need external validation  
+
+---
+
+## Repository Structure
+
+📌 Workflow:
+Sampling → Cleaning → EDA → Feature Engineering → Modeling → Validation → Interpretation
+
+---
+
+## ▶️ How to Reproduce This Project
+
+1. Generate sample dataset  
+2. Clean dataset  
+3. Create features  
+4. Run models  
+5. Validate results  
+6. Review interpretation  
+
+All required files are included.
+
+---
+
+## 🛠️ Tools & Technologies
+- Python (Pandas, NumPy, Scikit-learn)  
+- Jupyter / Google Colab  
+- Matplotlib / Seaborn  
+- Excel  
+
+---
+
+## 📌 Final Takeaway
+
+Anomaly detection can identify irregular patterns in public health data — but **trustworthiness requires validation**.
+
+By combining:
+- statistical evidence  
+- model agreement  
+- real-world interpretation  
+
+we show anomaly detection can be both **effective and interpretable**.
